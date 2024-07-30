@@ -37,16 +37,16 @@ export default function AuthSidebar() {
       </div>
       <div className="flex flex-col">
         <Link
-          href="/dashboard"
+          href="/overview"
           className="p-4 hover:bg-gray-800/25 hover:font-semibold hover:dark:bg-background/55 hover:dark:border-background/65 border-l-8 border-slate-800/45 dark:border-background/45"
         >
           Overview
         </Link>
         <Link
-          href="/dashboard"
+          href="/budgets"
           className="p-4 hover:bg-gray-800/25 hover:font-semibold hover:dark:bg-background/55 hover:dark:border-background/65 border-l-8 hover:border-slate-800/45 border-transparent"
         >
-          Budget Tool
+          Budgets
         </Link>
         <Link
           href="/dashboard"
