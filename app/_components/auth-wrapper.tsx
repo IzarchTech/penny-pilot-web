@@ -25,7 +25,7 @@ export default function AuthWrapper({
           </div>
         </nav>
         <div className="w-full">
-          <ScrollArea className="px-4">{children}</ScrollArea>
+          <ScrollArea className="px-4 h-full">{children}</ScrollArea>
         </div>
       </div>
     </main>
