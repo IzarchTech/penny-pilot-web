@@ -8,6 +8,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import {
   Table,
   TableBody,
@@ -77,7 +78,7 @@ const PLACEHOLDER_TRANSACTIONS: TransactionType[] = [
     createdAt: Date.now(),
     category: {
       id: "category-03",
-      title: "Data",
+      title: "Contract",
       icon: "🤝🏾",
     },
   },
@@ -136,7 +137,7 @@ export default function TransactionsPage() {
           </PopoverContent>
         </Popover>
       </div>
-      <Card className="w-full mt-4">
+      <Card className="w-full">
         <CardContent>
           {transactions.length === 0 && (
             <div className="min-h-40 flex items-center justify-center">
@@ -145,7 +146,7 @@ export default function TransactionsPage() {
           )}
 
           {transactions.length > 0 && (
-            <Table>
+            <Table className="w-full">
               <TableHeader>
                 <TableRow>
                   <TableHead />

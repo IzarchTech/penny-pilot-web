@@ -14,11 +14,8 @@ export function formatCurrency(data: number, currency = "NGN", lang = "en-NG") {
 
 export function formatTime(period: number) {
   return new Date(period).toLocaleString(undefined, {
-    weekday: "long",
-    day: "numeric",
+    day: "2-digit",
     year: "numeric",
-    month: "long",
-    hour: "2-digit",
-    minute: "2-digit",
+    month: "numeric",
   });
 }
