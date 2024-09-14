@@ -51,6 +51,7 @@ export default function AuthSidebar() {
       </div>
       <div className="flex flex-col">
         <LinkItem path="/overview" title="Overview" />
+        <LinkItem path="/transaction_categories" title="Categories" />
         <LinkItem path="/budgets" title="Budgets" />
         <LinkItem path="/transactions" title="Transaction History" />
       </div>
