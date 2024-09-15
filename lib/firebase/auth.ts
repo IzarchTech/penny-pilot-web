@@ -5,27 +5,54 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
+  UserCredential,
 } from "firebase/auth";
 import { UserLoginRequest, UserRegisterRequest } from "../types";
 
 const auth = getAuth();
 
-export const registerUser = (payload: UserRegisterRequest) => {
+/**
+ * Registers a new user with the given email and password.
+ *
+ * @param {UserRegisterRequest} payload - The user data to register.
+ * @returns {Promise<UserCredential>} - The result of the registration.
+ */
+export const registerUser = (
+  payload: UserRegisterRequest
+): Promise<UserCredential> => {
   return createUserWithEmailAndPassword(auth, payload.email, payload.email);
 };
 
-export const userLogin = (payload: UserLoginRequest) => {
+/**
+ * Logs in an existing user with the given email and password.
+ *
+ * @param {UserLoginRequest} payload - The user data to login.
+ * @returns {Promise<UserCredential>} - The result of the login.
+ */
+export const userLogin = (
+  payload: UserLoginRequest
+): Promise<UserCredential> => {
   return signInWithEmailAndPassword(auth, payload.email, payload.password);
 };
 
-export const googleAuth = () => {
-    const provider = new GoogleAuthProvider();
-    
-    provider.addScope("https://www.googleapis.com/auth/contacts.readonly");
-    
-    return signInWithPopup(auth, provider);
+/**
+ * Logs in an existing user using Google Auth.
+ *
+ * @returns {Promise<UserCredential>} - The result of the login.
+ */
+export const googleAuth = (): Promise<UserCredential> => {
+  const provider = new GoogleAuthProvider();
+
+  provider.addScope("https://www.googleapis.com/auth/contacts.readonly");
+
+  return signInWithPopup(auth, provider);
 };
 
-export const userLogout = () => {
-  signOut(auth);
+/**
+ * Logs out the current user.
+ *
+ * @returns {Promise<void>} - The result of the logout.
+ */
+export const userLogout = (): Promise<void> => {
+  return signOut(auth);
 };
