@@ -13,7 +13,7 @@ import firebaseApp from "./firebase-config";
 /**
  * Gets the Firebase Auth instance.
  */
-const auth = getAuth(firebaseApp);
+export const auth = getAuth(firebaseApp);
 
 /**
  * Registers a new user with the given email and password.
