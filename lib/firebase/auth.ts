@@ -8,8 +8,12 @@ import {
   UserCredential,
 } from "firebase/auth";
 import { UserLoginRequest, UserRegisterRequest } from "../types";
+import firebaseApp from "./firebase-config";
 
-const auth = getAuth();
+/**
+ * Gets the Firebase Auth instance.
+ */
+const auth = getAuth(firebaseApp);
 
 /**
  * Registers a new user with the given email and password.
