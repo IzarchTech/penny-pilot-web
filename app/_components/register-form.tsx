@@ -27,11 +27,19 @@ import { Loader } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/providers/auth.provider";
 import GoogleAuthButton from "./google-button";
+import { toast } from "sonner";
+import { AuthError } from "firebase/auth";
 
+/**
+ * Handles user registration.
+ */
 export default function RegisterForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { setCurrentUser } = useAuth();
 
+  /**
+   * The form state management
+   */
   const form = useForm<UserRegisterRequest>({
     resolver: zodResolver(registerUserFormSchema),
     defaultValues: {
@@ -41,17 +49,36 @@ export default function RegisterForm() {
     },
   });
 
+  /**
+   * Handle form submission
+   */
   const handleSubmit = form.handleSubmit(async (payload) => {
     setIsSubmitting(true);
     try {
       const response = await registerUser(payload);
-      setCurrentUser(response.user);
+      toast.success("Account created successfully, please login", {
+        position: "top-right",
+      });
+      form.reset(); // Reset the form
+      setCurrentUser(response.user); // Set the current user
     } catch (error) {
+      const authError = error as AuthError; // Cast the error to AuthError
+      toast.error("Account creation failed, please try again", {
+        description: authError.code
+          .split("/")[1]
+          .replaceAll("-", " ")
+          .trim()
+          .replace(/(^|\s)\S/g, function (t) {
+            return t.toUpperCase();
+          }),
+        position: "top-right",
+      });
       console.error(error);
     } finally {
-      setIsSubmitting(false);
+      setIsSubmitting(false); // Reset the loading state
     }
   });
+
   return (
     <Card>
       <CardHeader>
@@ -96,7 +123,7 @@ export default function RegisterForm() {
                 <FormItem>
                   <FormLabel>Password Confirmation</FormLabel>
                   <FormControl>
-                    <Input {...field} />
+                    <Input type="password" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
