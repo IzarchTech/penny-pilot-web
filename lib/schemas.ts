@@ -10,8 +10,8 @@ export const registerUserFormSchema = z
     password: z
       .string()
       .min(8, { message: "Password must be at least 8 characters" }),
-    passwordConfirmation: z.string().min(8, {
-      message: "Password confirmation must be at least 8 characters",
+    passwordConfirmation: z.string().min(1, {
+      message: "Password confirmation is required",
     }),
   })
   /**
