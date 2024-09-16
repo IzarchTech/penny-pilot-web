@@ -4,7 +4,9 @@ import { auth } from "@/lib/firebase/auth";
 import { onAuthStateChanged, User } from "firebase/auth";
 import {
   createContext,
+  Dispatch,
   ReactNode,
+  SetStateAction,
   useContext,
   useEffect,
   useState,
@@ -16,7 +18,8 @@ import {
 const AuthContext = createContext<{
   currentUser: User | null;
   isUserLoading: boolean;
-}>({ currentUser: null, isUserLoading: true });
+  setCurrentUser: Dispatch<SetStateAction<User | null>>;
+}>({ currentUser: null, isUserLoading: true, setCurrentUser: () => {} });
 
 /**
  * Provides an auth context to the application.
@@ -58,7 +61,9 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
      * `AuthContext.Provider` is a context provider from React's context API.
      * It provides the current user and the loading state to the children.
      */
-    <AuthContext.Provider value={{ currentUser, isUserLoading }}>
+    <AuthContext.Provider
+      value={{ currentUser, isUserLoading, setCurrentUser }}
+    >
       {children}
     </AuthContext.Provider>
   );
