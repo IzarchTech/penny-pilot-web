@@ -4,11 +4,10 @@ import { auth } from "@/lib/firebase/auth";
 import { onAuthStateChanged, User } from "firebase/auth";
 import {
   createContext,
-  Dispatch,
   ReactNode,
-  SetStateAction,
   useContext,
   useEffect,
+  useMemo,
   useState,
 } from "react";
 
@@ -18,8 +17,7 @@ import {
 const AuthContext = createContext<{
   currentUser: User | null;
   isUserLoading: boolean;
-  setCurrentUser: Dispatch<SetStateAction<User | null>>;
-}>({ currentUser: null, isUserLoading: true, setCurrentUser: () => {} });
+}>({ currentUser: null, isUserLoading: true });
 
 /**
  * Provides an auth context to the application.
@@ -35,18 +33,27 @@ const AuthContext = createContext<{
  *
  * @param children The children of the component.
  */
-export default function AuthProvider({ children }: { children: ReactNode }) {
+export default function AuthProvider({
+  children,
+}: Readonly<{ children: ReactNode }>) {
   // The current user
   const [currentUser, setCurrentUser] = useState<User | null>(null);
 
   // Whether the user state is being loaded
   const [isUserLoading, setIsUserLoading] = useState(true);
 
+  // The context value
+  const value = useMemo(
+    () => ({ currentUser, isUserLoading, setCurrentUser }),
+    [currentUser, isUserLoading, setCurrentUser]
+  );
+
   useEffect(() => {
     // Listen for changes in the user's authentication state
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       // Update the state and mark the state as loaded
       setCurrentUser(user);
+      console.log("current user", user);
       setIsUserLoading(false);
     });
 
@@ -59,13 +66,8 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
      * Provides the context to the children
      *
      * `AuthContext.Provider` is a context provider from React's context API.
-     * It provides the current user and the loading state to the children.
      */
-    <AuthContext.Provider
-      value={{ currentUser, isUserLoading, setCurrentUser }}
-    >
-      {children}
-    </AuthContext.Provider>
+    <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
   );
 }
 

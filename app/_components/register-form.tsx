@@ -25,7 +25,6 @@ import { registerUser } from "@/lib/firebase/auth";
 import { Input } from "@/components/ui/input";
 import { Loader } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useAuth } from "@/providers/auth.provider";
 import GoogleAuthButton from "./google-button";
 import { toast } from "sonner";
 import { AuthError } from "firebase/auth";
@@ -35,7 +34,6 @@ import { AuthError } from "firebase/auth";
  */
 export default function RegisterForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const { setCurrentUser } = useAuth();
 
   /**
    * The form state management
@@ -55,12 +53,11 @@ export default function RegisterForm() {
   const handleSubmit = form.handleSubmit(async (payload) => {
     setIsSubmitting(true);
     try {
-      const response = await registerUser(payload);
+      await registerUser(payload);
       toast.success("Account created successfully, please login", {
         position: "top-right",
       });
       form.reset(); // Reset the form
-      setCurrentUser(response.user); // Set the current user
     } catch (error) {
       const authError = error as AuthError; // Cast the error to AuthError
       toast.error("Account creation failed, please try again", {

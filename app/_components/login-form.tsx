@@ -21,16 +21,20 @@ import { UserLoginRequest } from "@/lib/types";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginUserFormSchema } from "@/lib/schemas";
-import { useAuth } from "@/providers/auth.provider";
 import GoogleAuthButton from "./google-button";
 import { userLogin } from "@/lib/firebase/auth";
 import { Input } from "@/components/ui/input";
 import { Loader } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
+import { AuthError } from "firebase/auth";
 
+/**
+ * Handles login form submission
+ *
+ */
 export default function LoginForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const { setCurrentUser } = useAuth();
 
   const form = useForm<UserLoginRequest>({
     resolver: zodResolver(loginUserFormSchema),
@@ -40,15 +44,39 @@ export default function LoginForm() {
     },
   });
 
+  /**
+   * Handles form submission
+   *
+   * The submission is handled by calling `userLogin` Firebase function
+   * with the form data.
+   * If the submission is successful, it will show a success toast.
+   * If the submission fails, it will show an error toast with the error message.
+   */
   const handleSubmit = form.handleSubmit(async (payload) => {
     setIsSubmitting(true);
     try {
-      const response = await userLogin(payload);
-      setCurrentUser(response.user);
+      await userLogin(payload);
+
+      form.reset(); // Reset the form
+
+      toast.success("Login successful", {
+        position: "top-right",
+      }); // Show success toast
     } catch (error) {
+      const authError = error as AuthError; // Cast the error to AuthError
+      toast.error("Invalid credentials", {
+        description: authError.code
+          .split("/")[1]
+          .replaceAll("-", " ")
+          .trim()
+          .replace(/(^|\s)\S/g, function (t) {
+            return t.toUpperCase();
+          }),
+        position: "top-right",
+      });
       console.error(error);
     } finally {
-      setIsSubmitting(false);
+      setIsSubmitting(false); // Reset the loading state
     }
   });
 
