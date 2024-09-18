@@ -5,6 +5,7 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
+  updateProfile,
   UserCredential,
 } from "firebase/auth";
 import { UserLoginRequest, UserRegisterRequest } from "../types";
@@ -18,13 +19,23 @@ export const auth = getAuth(firebaseApp);
 /**
  * Registers a new user with the given email and password.
  *
- * @param {UserRegisterRequest} payload - The user data to register.
+ * @param {UserRegisterRequest} request - The user data to register.
  * @returns {Promise<UserCredential>} - The result of the registration.
  */
-export const registerUser = (
-  payload: UserRegisterRequest
-): Promise<UserCredential> => {
-  return createUserWithEmailAndPassword(auth, payload.email, payload.email);
+export const registerUser = async ({
+  email,
+  name,
+  password,
+}: UserRegisterRequest): Promise<UserCredential> => {
+  const userCredential = await createUserWithEmailAndPassword(
+    auth,
+    email,
+    password
+  );
+
+  await updateProfile(userCredential.user, { displayName: name });
+
+  return userCredential;
 };
 
 /**

@@ -1,7 +1,14 @@
 "use client";
 
 import { Button, buttonVariants } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import { Tabs, TabsTrigger, TabsList, TabsContent } from "@/components/ui/tabs";
 import { cn } from "@/lib/utils";
 import { Oswald } from "next/font/google";
@@ -53,6 +60,12 @@ export default function GetStarted() {
         </Button>
       </DialogTrigger>
       <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Get Started</DialogTitle>
+          <DialogDescription>
+            Login or register to get started
+          </DialogDescription>
+        </DialogHeader>
         <Tabs defaultValue="sign-up">
           <TabsList className="grid w-full grid-cols-2">
             <TabsTrigger className="uppercase" value="sign-up">

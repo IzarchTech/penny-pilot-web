@@ -41,6 +41,7 @@ export default function RegisterForm() {
   const form = useForm<UserRegisterRequest>({
     resolver: zodResolver(registerUserFormSchema),
     defaultValues: {
+      name: "",
       email: "",
       password: "",
       passwordConfirmation: "",
@@ -54,7 +55,7 @@ export default function RegisterForm() {
     setIsSubmitting(true);
     try {
       await registerUser(payload);
-      toast.success("Account created successfully, please login", {
+      toast.success("Account created successfully", {
         position: "top-right",
       });
       form.reset(); // Reset the form
@@ -79,7 +80,7 @@ export default function RegisterForm() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="uppercase">Sign Up</CardTitle>
+        <CardTitle className="uppercase">Register an account</CardTitle>
         <CardDescription>
           Enter your details to create an account.
         </CardDescription>
@@ -87,6 +88,19 @@ export default function RegisterForm() {
       <CardContent>
         <Form {...form}>
           <form onSubmit={handleSubmit} className="space-y-4">
+            <FormField
+              control={form.control}
+              name="name"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Name</FormLabel>
+                  <FormControl>
+                    <Input {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
             <FormField
               control={form.control}
               name="email"
