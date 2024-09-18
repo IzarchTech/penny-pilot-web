@@ -7,6 +7,7 @@ import {
   ReactNode,
   useContext,
   useEffect,
+  useMemo,
   useState,
 } from "react";
 
@@ -32,18 +33,27 @@ const AuthContext = createContext<{
  *
  * @param children The children of the component.
  */
-export default function AuthProvider({ children }: { children: ReactNode }) {
+export default function AuthProvider({
+  children,
+}: Readonly<{ children: ReactNode }>) {
   // The current user
   const [currentUser, setCurrentUser] = useState<User | null>(null);
 
   // Whether the user state is being loaded
   const [isUserLoading, setIsUserLoading] = useState(true);
 
+  // The context value
+  const value = useMemo(
+    () => ({ currentUser, isUserLoading, setCurrentUser }),
+    [currentUser, isUserLoading, setCurrentUser]
+  );
+
   useEffect(() => {
     // Listen for changes in the user's authentication state
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       // Update the state and mark the state as loaded
       setCurrentUser(user);
+      console.log("current user", user);
       setIsUserLoading(false);
     });
 
@@ -56,11 +66,8 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
      * Provides the context to the children
      *
      * `AuthContext.Provider` is a context provider from React's context API.
-     * It provides the current user and the loading state to the children.
      */
-    <AuthContext.Provider value={{ currentUser, isUserLoading }}>
-      {children}
-    </AuthContext.Provider>
+    <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
   );
 }
 

@@ -1,6 +1,6 @@
 import { FirebaseOptions, getApps, initializeApp } from "firebase/app";
 
-import { getAnalytics } from "firebase/analytics";
+import { Analytics, getAnalytics, isSupported } from "firebase/analytics";
 
 const options: FirebaseOptions = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -15,5 +15,24 @@ const options: FirebaseOptions = {
 const firebaseApp =
   getApps().length === 0 ? initializeApp(options) : getApps()[0];
 
+/**
+ * Gets the Firebase Analytics instance.
+ *
+ * @returns The Firebase Analytics instance if supported, null otherwise.
+ */
+async function getAnalyticsInstance(): Promise<Analytics | null> {
+  if (typeof window !== "undefined") {
+    const supported = await isSupported();
+    if (supported) {
+      return getAnalytics(firebaseApp);
+    } else {
+      return null;
+    }
+  } else {
+    return null;
+  }
+}
+
+export const analytics = getAnalyticsInstance();
+
 export default firebaseApp;
-export const analytics = getAnalytics(firebaseApp);
