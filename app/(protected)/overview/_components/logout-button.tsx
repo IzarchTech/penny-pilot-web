@@ -35,6 +35,9 @@ export default function LogoutButton() {
         position: "top-right",
       });
 
+      // Add a timer delay
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+
       // Redirect to the home page
       router.replace("/");
     } catch (error) {
