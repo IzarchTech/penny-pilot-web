@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { googleAuth } from "@/lib/firebase/auth";
 import googleLogo from "@/assets/google_logo.svg";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 /**
  * A button that allows users to log in with Google.
@@ -18,6 +19,8 @@ import { toast } from "sonner";
  */
 export default function GoogleAuthButton() {
   const [isLoading, setIsLoading] = useState(false);
+
+  const router = useRouter();
 
   /**
    * Handles the button click event.
@@ -32,6 +35,8 @@ export default function GoogleAuthButton() {
       toast.success("Login successful", {
         position: "top-right",
       }); // Show success toast
+
+      router.push("/overview"); // Redirect to dashboard
     } catch (error) {
       toast.error("Something went wrong", {
         position: "top-right",

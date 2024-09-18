@@ -28,6 +28,7 @@ import { Loader } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { AuthError } from "firebase/auth";
+import { useRouter } from "next/navigation";
 
 /**
  * Handles login form submission
@@ -35,6 +36,8 @@ import { AuthError } from "firebase/auth";
  */
 export default function LoginForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const router = useRouter();
 
   const form = useForm<UserLoginRequest>({
     resolver: zodResolver(loginUserFormSchema),
@@ -58,10 +61,13 @@ export default function LoginForm() {
       await userLogin(payload);
 
       form.reset(); // Reset the form
-
+      
+      router.push("/overview"); // Redirect to dashboard
+      
       toast.success("Login successful", {
         position: "top-right",
       }); // Show success toast
+
     } catch (error) {
       const authError = error as AuthError; // Cast the error to AuthError
       toast.error("Invalid credentials", {

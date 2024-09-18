@@ -1,13 +1,17 @@
 import { ScrollArea } from "@/components/ui/scroll-area";
 import Logo from "./_components/logo";
 import { DarkModeToggle } from "./_components/dark-mode-toggle";
+import GetStarted from "./_components/get-started";
 
 export default function Home() {
   return (
     <main className="h-full grid grid-rows-[auto_1fr]">
-      <div className="w-full border-b bg-card text-card-foreground shadow px-2 py-1 md:p-4 flex items-center justify-between">
+      <div className="w-full border-b bg-card text-card-foreground shadow flex items-center justify-between h-20 md:h-24 pl-2 md:pl-4">
         <Logo />
-        <DarkModeToggle />
+        <div className="md:flex gap-4 items-center hidden">
+          <DarkModeToggle />
+          <GetStarted />
+        </div>
       </div>
       <ScrollArea className="flex flex-col justify-center pt-4">
         <div className="container">
