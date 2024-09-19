@@ -1,9 +1,40 @@
+"use client";
+
 import { ReactNode } from "react";
+import Logo from "../_components/logo";
+import { DarkModeToggle } from "../_components/dark-mode-toggle";
+import { ScrollArea } from "@radix-ui/react-scroll-area";
+import { useAuth } from "@/providers/auth.provider";
+import { useRouter } from "next/navigation";
+import { Loader } from "lucide-react";
 
 export default function ProtectedLayout({
   children,
 }: Readonly<{ children: ReactNode }>) {
+  const { currentUser, isUserLoading } = useAuth();
+
+  const router = useRouter();
+
+  if (!currentUser && !isUserLoading) {
+    router.push("/");
+    return null;
+  }
+
   return (
-    <div className="h-full w-full grid grid-rows-[auto_1fr]">{children}</div>
+    <main className="h-full grid grid-rows-[auto_1fr] select-none">
+      <div className="w-full border-b bg-card text-card-foreground shadow flex items-center justify-between h-20 md:h-24 px-2 md:px-4">
+        <Logo path="/overview" />
+        <DarkModeToggle />
+      </div>
+      {isUserLoading ? (
+        <div className="flex justify-center items-center h-full">
+          <Loader className="animate-spin" />
+        </div>
+      ) : (
+        <ScrollArea className="flex flex-col justify-center pt-4">
+          {children}
+        </ScrollArea>
+      )}
+    </main>
   );
 }
