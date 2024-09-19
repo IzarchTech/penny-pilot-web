@@ -3,7 +3,6 @@
 import { ReactNode } from "react";
 import Logo from "../_components/logo";
 import { DarkModeToggle } from "../_components/dark-mode-toggle";
-import { ScrollArea } from "@radix-ui/react-scroll-area";
 import { useAuth } from "@/providers/auth.provider";
 import { useRouter } from "next/navigation";
 import { Loader } from "lucide-react";
@@ -31,9 +30,9 @@ export default function ProtectedLayout({
           <Loader className="animate-spin" />
         </div>
       ) : (
-        <ScrollArea className="flex flex-col justify-center pt-4">
+        <div className="flex flex-col pt-4 overflow-y-auto">
           {children}
-        </ScrollArea>
+        </div>
       )}
     </main>
   );
