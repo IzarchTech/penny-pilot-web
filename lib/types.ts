@@ -104,3 +104,34 @@ export type UserTransaction = {
  * @property {string} userId - The ID of the user who created the budget.
  */
 export type AddNewBudgetRequest = z.infer<typeof addNewBudgetFormSchema>;
+
+/**
+ * A budget entry.
+ *
+ * @property {number} amount - The amount of the entry.
+ * @property {number} createdAt - The date the entry was created, in Unix time.
+ */
+export type BudgetEntry = {
+  amount: number;
+  createdAt: number;
+};
+
+
+/**
+ * A budget.
+ *
+ * @property {string} id - The ID of the budget.
+ * @property {string} name - The name of the budget.
+ * @property {number} amount - The amount of the budget.
+ * @property {string} userId - The ID of the user who created the budget.
+ * @property {Date} createdAt - The date the budget was created.
+ * @property {BudgetEntry[]} entries - The entries in the budget.
+ */
+export type Budget = {
+  id: string;
+  name: string;
+  amount: number;
+  userId: string;
+  createdAt: Date;
+  entries: BudgetEntry[];
+};
