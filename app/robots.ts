@@ -13,7 +13,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
-      disallow: ["/finance_management"],
+      disallow: ["/finance_management", "/budget_management"],
     },
   };
 }
