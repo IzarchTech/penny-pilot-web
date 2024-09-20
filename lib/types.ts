@@ -59,3 +59,22 @@ export type TransactionCategory = {
  * @property {string} userId - The ID of the user who created the transaction.
  */
 export type AddTransactionRequest = z.infer<typeof addTransactionFormSchema>;
+
+/**
+ * A user transaction.
+ *
+ * @property {string} id - The ID of the transaction.
+ * @property {number} amount - The amount of the transaction.
+ * @property {Object} category - The transaction category.
+ * @property {string} category.name - The name of the transaction category.
+ * @property {string} category.icon - The icon for the transaction category.
+ * @property {string} userId - The ID of the user who created the transaction.
+ * @property {Date} createdAt - The date the transaction was created.
+ */
+export type UserTransaction = {
+  id: string;
+  amount: number;
+  category: Pick<TransactionCategory, "name" | "icon">;
+  userId: string;
+  createdAt: Date;
+};
