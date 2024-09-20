@@ -43,7 +43,7 @@ export default function AddTransactionCategoryDialog() {
     defaultValues: {
       name: "",
       icon: "🟨",
-      userId: currentUser?.uid || "",
+      userId: currentUser?.uid ?? "",
     },
   });
 
@@ -54,6 +54,7 @@ export default function AddTransactionCategoryDialog() {
       toast.success("Transaction category added", {
         position: "top-right",
       });
+      form.reset();
       setIsOpen(false);
     } catch (error) {
       toast.error("Failed to add transaction category", {
