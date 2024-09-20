@@ -153,7 +153,7 @@ export default function AddTransactionDialog() {
               name="amount"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Name</FormLabel>
+                  <FormLabel>Amount</FormLabel>
                   <FormControl>
                     <Input
                       type="number"
