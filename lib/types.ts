@@ -1,5 +1,6 @@
 import { z } from "zod";
 import {
+  addNewBudgetFormSchema,
   addTransactionCategoryFormSchema,
   addTransactionFormSchema,
   loginUserFormSchema,
@@ -94,3 +95,12 @@ export type UserTransaction = {
   userId: string;
   createdAt: FirebaseTimestamp;
 };
+
+/**
+ * The request body for adding a new budget.
+ *
+ * @property {string} name - The name of the budget.
+ * @property {number} amount - The amount of the budget.
+ * @property {string} userId - The ID of the user who created the budget.
+ */
+export type AddNewBudgetRequest = z.infer<typeof addNewBudgetFormSchema>;

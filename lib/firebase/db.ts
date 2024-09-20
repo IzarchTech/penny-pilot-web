@@ -5,7 +5,11 @@ import {
   serverTimestamp,
 } from "firebase/firestore";
 import firebaseApp from "./firebase-config";
-import { AddTransactionCategoryRequest, AddTransactionRequest } from "../types";
+import {
+  AddNewBudgetRequest,
+  AddTransactionCategoryRequest,
+  AddTransactionRequest,
+} from "../types";
 
 /**
  * Collection name for the user's transaction categories.
@@ -16,6 +20,11 @@ export const CATEGORIES_COLLECTION = "categories";
  * Collection name for the user's transactions.
  */
 export const USER_TRANSACTIONS_COLLECTION = "transactions";
+
+/**
+ * Collection name for the user's budgets.
+ */
+export const USER_BUDGET_COLLECTION = "budgets";
 
 /**
  * The Firestore database instance.
@@ -50,6 +59,19 @@ export const addTransactionCategory = (
  */
 export const addTransaction = (payload: AddTransactionRequest) => {
   return addDoc(collection(db, USER_TRANSACTIONS_COLLECTION), {
+    ...payload,
+    createdAt: serverTimestamp(), // Set createdAt to the current server timestamp
+  });
+};
+
+/**
+ * Adds a new budget to the Firestore database.
+ *
+ * @param payload - The budget data to be added.
+ * @returns A promise that resolves with the newly added budget.
+ */
+export const addNewBudget = (payload: AddNewBudgetRequest) => {
+  return addDoc(collection(db, USER_BUDGET_COLLECTION), {
     ...payload,
     createdAt: serverTimestamp(), // Set createdAt to the current server timestamp
   });

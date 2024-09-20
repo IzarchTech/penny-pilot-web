@@ -65,3 +65,17 @@ export const addTransactionFormSchema = z.object({
   }),
   userId: z.string().min(1, { message: "User ID is required" }),
 });
+
+/**
+ * Form validation schema for the add budget form.
+ */
+export const addNewBudgetFormSchema = z.object({
+  name: z
+    .string()
+    .min(1, { message: "Name is required" })
+    .min(3, { message: "Name must be at least 3 characters" }),
+  userId: z.string().min(1, { message: "User ID is required" }),
+  amount: z
+    .number({ invalid_type_error: "Amount is required" })
+    .min(1, { message: "Amount must be greater than 0" }),
+});
