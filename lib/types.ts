@@ -1,6 +1,7 @@
 import { z } from "zod";
 import {
   addTransactionCategoryFormSchema,
+  addTransactionFormSchema,
   loginUserFormSchema,
   registerUserFormSchema,
 } from "./schemas";
@@ -49,3 +50,12 @@ export type TransactionCategory = {
   userId: string;
   createdAt: Date;
 };
+
+/**
+ * The request body for adding a new transaction.
+ *
+ * @property {number} amount - The amount of the transaction.
+ * @property {Object} category - The transaction category.
+ * @property {string} userId - The ID of the user who created the transaction.
+ */
+export type AddTransactionRequest = z.infer<typeof addTransactionFormSchema>;
