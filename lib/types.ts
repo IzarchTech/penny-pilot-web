@@ -61,6 +61,22 @@ export type TransactionCategory = {
 export type AddTransactionRequest = z.infer<typeof addTransactionFormSchema>;
 
 /**
+ * A Firebase Timestamp object.
+ *
+ * @see https://firebase.google.com/docs/reference/js/v8/firebase.firestore.Timestamp
+ */
+export type FirebaseTimestamp = {
+  /**
+   * The number of seconds since the Unix epoch (January 1, 1970, 00:00:00 UTC).
+   */
+  seconds: number;
+  /**
+   * The number of nanoseconds since the seconds timestamp.
+   */
+  nanoseconds: number;
+};
+
+/**
  * A user transaction.
  *
  * @property {string} id - The ID of the transaction.
@@ -76,5 +92,5 @@ export type UserTransaction = {
   amount: number;
   category: Pick<TransactionCategory, "name" | "icon">;
   userId: string;
-  createdAt: Date;
+  createdAt: FirebaseTimestamp;
 };

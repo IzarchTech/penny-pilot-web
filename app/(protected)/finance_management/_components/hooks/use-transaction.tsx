@@ -2,7 +2,13 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { USER_TRANSACTIONS_COLLECTION, db } from "@/lib/firebase/db";
-import { collection, onSnapshot, query, where } from "firebase/firestore";
+import {
+  collection,
+  onSnapshot,
+  orderBy,
+  query,
+  where,
+} from "firebase/firestore";
 import { useAuth } from "@/providers/auth.provider";
 import { UserTransaction } from "@/lib/types";
 
@@ -48,7 +54,8 @@ export default function useTransaction() {
     // Create a query that fetches all transactions for the current user
     const q = query(
       collection(db, USER_TRANSACTIONS_COLLECTION),
-      where("userId", "==", currentUser.uid)
+      where("userId", "==", currentUser.uid),
+      orderBy("createdAt", "desc")
     );
     // Create an unsubscribe function to cleanup the listener when the component is unmounted
     const unsubscribe = onSnapshot(q, (snapshot) => {
