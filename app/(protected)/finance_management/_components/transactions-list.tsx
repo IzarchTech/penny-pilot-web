@@ -11,6 +11,7 @@ import {
 import AddTransactionDialog from "./add-transaction-dialog";
 import useTransaction from "./hooks/use-transaction";
 import { cn, formatCurrency, formatTime } from "@/lib/utils";
+import DeleteTransactionDialog from "./delete-transaction-dialog";
 
 export default function TransactionsList() {
   const { transactions } = useTransaction();
@@ -28,6 +29,7 @@ export default function TransactionsList() {
               <TableHead>Amount</TableHead>
               <TableHead>Category</TableHead>
               <TableHead>Date</TableHead>
+              <TableHead />
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -42,6 +44,9 @@ export default function TransactionsList() {
                   {transaction.category.icon} {transaction.category.name}
                 </TableCell>
                 <TableCell>{formatTime(transaction.createdAt)}</TableCell>
+                <TableCell>
+                  <DeleteTransactionDialog id={transaction.id} />
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>
