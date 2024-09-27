@@ -1,9 +1,8 @@
 "use client";
 
 import AddTransactionCategoryDialog from "./add-transaction-category-dialog";
-import { cn } from "@/lib/utils";
-import { buttonVariants } from "@/components/ui/button";
 import useTransactionCategory from "./hooks/use-transaction-category";
+import DeleteTransactionCategoryDialog from "./delete-transaction-category-dialog";
 
 /**
  * Transaction categories component.
@@ -19,10 +18,16 @@ export default function TransactionCategories() {
       {/* Display existing transaction categories */}
       {transactionCategories.map((category) => (
         <div
-          className={cn(buttonVariants({ variant: "outline" }))}
           key={category.id}
+          className="flex items-center gap-2 border rounded-md pl-4 group hover:border-destructive/90"
         >
-          {category.icon} {category.name}
+          <span>
+            {category.icon} {category.name}
+          </span>
+          <DeleteTransactionCategoryDialog
+            id={category.id}
+            name={`${category.name} ${category.icon}`}
+          />
         </div>
       ))}
 

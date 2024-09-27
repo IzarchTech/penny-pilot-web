@@ -1,6 +1,8 @@
 import {
   addDoc,
   collection,
+  deleteDoc,
+  doc,
   getFirestore,
   serverTimestamp,
 } from "firebase/firestore";
@@ -49,6 +51,16 @@ export const addTransactionCategory = (
     ...payload,
     createdAt: serverTimestamp(),
   });
+};
+
+/**
+ * Deletes a transaction category from the Firestore database.
+ *
+ * @param categoryId - The ID of the transaction category to be deleted.
+ * @returns A promise that resolves with the deleted category.
+ */
+export const deleteTransactionCategory = (categoryId: string) => {
+  return deleteDoc(doc(db, CATEGORIES_COLLECTION, categoryId));
 };
 
 /**
