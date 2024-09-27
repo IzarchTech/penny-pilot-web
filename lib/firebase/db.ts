@@ -76,6 +76,10 @@ export const addTransaction = (payload: AddTransactionRequest) => {
   });
 };
 
+export const deleteTransaction = (transactionId: string) => {
+  return deleteDoc(doc(db, USER_TRANSACTIONS_COLLECTION, transactionId));
+};
+
 /**
  * Adds a new budget to the Firestore database.
  *
