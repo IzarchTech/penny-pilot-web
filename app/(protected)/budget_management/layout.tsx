@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import BudgetProvider from "./_components/budget.provider";
 
 export const metadata: Metadata = {
   title: "Budget Management - Penny Pilot",
@@ -16,5 +17,9 @@ export const metadata: Metadata = {
 export default function BudgetManagementLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
-  return <div className="container">{children}</div>;
+  return (
+    <div className="container">
+      <BudgetProvider>{children}</BudgetProvider>
+    </div>
+  );
 }

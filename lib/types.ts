@@ -1,6 +1,6 @@
 import { z } from "zod";
 import {
-  addNewBudgetFormSchema,
+  budgetFormSchema,
   addTransactionCategoryFormSchema,
   addTransactionFormSchema,
   loginUserFormSchema,
@@ -103,7 +103,7 @@ export type UserTransaction = {
  * @property {number} amount - The amount of the budget.
  * @property {string} userId - The ID of the user who created the budget.
  */
-export type AddNewBudgetRequest = z.infer<typeof addNewBudgetFormSchema>;
+export type BudgetRequest = z.infer<typeof budgetFormSchema>;
 
 /**
  * A budget entry.
