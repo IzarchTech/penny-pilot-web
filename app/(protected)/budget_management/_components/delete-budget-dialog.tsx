@@ -49,7 +49,7 @@ export default function DeleteBudgetDialog() {
 
   return (
     <Dialog
-      open={!!budgetToDelete!!}
+      open={!!budgetToDelete}
       onOpenChange={() => setBudgetToDelete(null)}
     >
       <DialogContent>
