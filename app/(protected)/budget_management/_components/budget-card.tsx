@@ -28,7 +28,7 @@ export default function BudgetCard({
   budget,
   percentage,
 }: Readonly<BudgetCardProps>) {
-  const { setBudgetToEdit } = useBudget();
+  const { setBudgetToDelete, setBudgetToEdit } = useBudget();
 
   return (
     <Card className="min-h-40">
@@ -53,7 +53,10 @@ export default function BudgetCard({
                 <span>Edit</span>
               </DropdownMenuItem>
               <DropdownMenuSeparator />
-              <DropdownMenuItem className="gap-4 text-red-500 focus:bg-red-500">
+              <DropdownMenuItem
+                className="gap-4 text-red-500 focus:bg-red-500"
+                onClick={() => setBudgetToDelete(budget)}
+              >
                 <Trash2 />
                 <span>Delete</span>
               </DropdownMenuItem>

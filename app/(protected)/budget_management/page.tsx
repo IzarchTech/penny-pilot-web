@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import { Budget } from "@/lib/types";
 import BudgetCard from "./_components/budget-card";
 import EditBudgetDialog from "./_components/edit-budget-dialog";
+import DeleteBudgetDialog from "./_components/delete-budget-dialog";
 
 /**
  * The BudgetManagementPage component is a page that displays a list of the user's budgets.
@@ -84,6 +85,7 @@ export default function BudgetManagementPage() {
       </div>
 
       <EditBudgetDialog />
+      <DeleteBudgetDialog />
     </div>
   );
 }
