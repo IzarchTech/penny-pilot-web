@@ -5,10 +5,11 @@ import {
   doc,
   getFirestore,
   serverTimestamp,
+  updateDoc,
 } from "firebase/firestore";
 import firebaseApp from "./firebase-config";
 import {
-  AddNewBudgetRequest,
+  BudgetRequest,
   AddTransactionCategoryRequest,
   AddTransactionRequest,
 } from "../types";
@@ -80,15 +81,34 @@ export const deleteTransaction = (transactionId: string) => {
   return deleteDoc(doc(db, USER_TRANSACTIONS_COLLECTION, transactionId));
 };
 
+export const deleteBudget = (budgetId: string) => {
+  return deleteDoc(doc(db, USER_BUDGET_COLLECTION, budgetId));
+};
+
 /**
  * Adds a new budget to the Firestore database.
  *
  * @param payload - The budget data to be added.
  * @returns A promise that resolves with the newly added budget.
  */
-export const addNewBudget = (payload: AddNewBudgetRequest) => {
+export const addNewBudget = (payload: BudgetRequest) => {
   return addDoc(collection(db, USER_BUDGET_COLLECTION), {
     ...payload,
     createdAt: serverTimestamp(), // Set createdAt to the current server timestamp
   });
+};
+
+/**
+ * Updates a budget in the Firestore database.
+ *
+ * @param budgetId - The ID of the budget to be updated.
+ * @param payload - The updated budget data.
+ * @returns A promise that resolves with the updated budget.
+ */
+export const updateBudget = (
+  budgetId: string,
+  payload: BudgetRequest
+): Promise<void> => {
+  const docRef = doc(db, USER_BUDGET_COLLECTION, budgetId);
+  return updateDoc(docRef, { ...payload });
 };

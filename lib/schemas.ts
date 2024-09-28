@@ -67,9 +67,9 @@ export const addTransactionFormSchema = z.object({
 });
 
 /**
- * Form validation schema for the add budget form.
+ * Form validation schema for the budget form.
  */
-export const addNewBudgetFormSchema = z.object({
+export const budgetFormSchema = z.object({
   name: z
     .string()
     .min(1, { message: "Name is required" })
