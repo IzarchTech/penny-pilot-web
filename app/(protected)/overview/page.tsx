@@ -18,7 +18,7 @@ export default function OverviewPage() {
   const { currentUser } = useAuth();
   return (
     <div className="h-full container flex flex-col justify-center items-center">
-      <Card>
+      <Card className="max-w-[300px] md:max-w-md">
         <CardHeader>
           <CardTitle>Welcome Back, {currentUser?.displayName}</CardTitle>
           <CardDescription>
@@ -26,7 +26,7 @@ export default function OverviewPage() {
           </CardDescription>
         </CardHeader>
         <CardContent className="flex items-center flex-col">
-          <div className="w-96 space-y-4">
+          <div className="space-y-4">
             <Link
               href="/finance_management"
               className={cn(
