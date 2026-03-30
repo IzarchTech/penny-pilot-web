@@ -1,0 +1,1 @@
+npx @biomejs/biome check --write --no-errors-on-unformatted --files-ignore-unknown=true --staged
