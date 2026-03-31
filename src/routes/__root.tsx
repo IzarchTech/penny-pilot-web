@@ -5,6 +5,9 @@ import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 
 import TanStackQueryDevtools from "../integrations/tanstack-query/devtools";
 import TanStackQueryProvider from "../integrations/tanstack-query/root-provider";
+import "@fontsource/manrope/700.css"; // Bold
+import "@fontsource/manrope/400.css"; // Regular
+import "@fontsource/manrope/300.css"; // Light
 import appCss from "../styles.css?url";
 
 interface MyRouterContext {
