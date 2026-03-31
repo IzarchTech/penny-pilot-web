@@ -1,1 +1,5 @@
-npx @biomejs/biome check --write --no-errors-on-unformatted --files-ignore-unknown=true --staged
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+echo "Running Biome check on staged files..." >&2
+npx @biomejs/biome check --write --staged --files-ignore-unknown=true --no-errors-on-unmatched
