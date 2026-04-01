@@ -1,0 +1,130 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	min-height: 100vh;
+}
+
+.formWrapper {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	max-width: 380%;
+	padding: 24px;
+	border-radius: 8px;
+	background-color: var(--secondary-background-color);
+	box-shadow: 0 10px 5px 0 rgba(0, 0, 0, 50%);
+}
+
+.formWrapper > p {
+	font-family: "Inter", sans-serif;
+	font-weight: 200;
+	font-size: 13px;
+	line-height: 20px;
+	text-transform: uppercase;
+	color: var(--text-muted);
+	letter-spacing: 0.35px;
+}
+
+.formWrapper > h2 {
+	font-size: 30px;
+	font-weight: 600;
+	line-height: 36px;
+	letter-spacing: -0.75px;
+}
+
+form {
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
+	padding-top: 32px;
+	width: 100%;
+}
+
+.inputGroup {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	position: relative;
+}
+
+.inputGroup > label {
+	font-family: "Inter", sans-serif;
+	font-weight: 600;
+	font-size: 12px;
+	line-height: 16px;
+	text-transform: uppercase;
+	letter-spacing: 1.2px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.inputGroup > input {
+	padding: 12px;
+	padding-left: 40px;
+	border-radius: 4px;
+	border: none;
+	outline: none;
+	background-color: #353534;
+	font-size: 14px;
+	color: var(--text-primary);
+	transition: all 600ms ease-in-out;
+}
+
+.inputGroup > input:focus {
+	outline: none;
+	border: 0.5px solid var(--text-primary);
+	transform: scale(1.02);
+}
+
+.inputGroup > svg {
+	position: absolute;
+	top: 50%;
+	left: 2%;
+	transform: translateY(-2%);
+	color: var(--text-muted);
+	pointer-events: none;
+	transition: color 0.5s ease-in-out;
+}
+
+.inputGroup > input:focus ~ svg,
+.inputGroup > input:hover ~ svg,
+.inputGroup > input:active ~ svg {
+	color: var(--text-primary);
+}
+
+.inputGroup > input:placeholder-shown {
+	color: var(--text-muted);
+}
+
+a {
+	color: var(--primary-color);
+	text-decoration: none;
+	transition: color 0.5s ease-in-out;
+}
+
+a:hover {
+	color: var(--secondary-color);
+}
+
+.footerSection {
+	font-family: "Inter", sans-serif;
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	font-size: 14px;
+	line-height: 20px;
+	gap: 4px;
+	padding-top: 64px;
+}
+
+.footerSection > a {
+	font-weight: 600;
+}
+
+.footerSection > a:hover {
+	text-decoration: underline;
+}

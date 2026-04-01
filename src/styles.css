@@ -8,16 +8,18 @@
 
 :root {
   --primary-color: #10B981;
-  --secondary-color: #508168;
-  --background-color: #0A0A0A;
-  --text-color: #E5E2E1;
-  --text-muted-color: #71717A;
+  --secondary-color: #07714d;
+  --primary-foreground: #03412c;
+  --primary-background-color: #0A0A0A;
+  --secondary-background-color: #1C1B1B;
+  --text-primary: #E5E2E1;
+  --text-muted: #71717A;
 }
 
 body {
-  background-color: var(--background-color);
+  background-color: var(--primary-background-color);
   font-family: 'Manrope', sans-serif;
-  color: var(--text-color);
+  color: var(--text-primary);
   display: flex;
   flex-direction: column;
   min-height: 100vh;
