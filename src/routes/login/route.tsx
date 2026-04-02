@@ -1,8 +1,9 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { ArrowRightIcon, LockKeyholeIcon, UserIcon } from "lucide-react";
-import "@fontsource/inter/200.css";
-import "@fontsource/inter/600.css";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { ArrowRightIcon, AtSignIcon, LockKeyholeIcon } from "lucide-react";
 import Button from "#/components/button";
+import Card from "#/components/card";
+import Flex from "#/components/flex";
+import Input from "#/components/input";
 import styles from "./login.module.css";
 
 export const Route = createFileRoute("/login")({
@@ -38,36 +39,41 @@ export const Route = createFileRoute("/login")({
 
 function LoginRouteComponent() {
 	return (
-		<main className={styles.container}>
-			<div className={styles.formWrapper}>
-				<h2>Welcome Back</h2>
-				<p>Access your financial observatory</p>
+		<Flex as="main" className={styles.container}>
+			<Card>
+				<Card.Header>
+					<Card.Title>Welcome Back</Card.Title>
+					<Card.Description>Access your financial observatory</Card.Description>
+				</Card.Header>
 
-				<form>
-					<div className={styles.inputGroup}>
-						<label htmlFor="email">Email Address</label>
-						<input type="email" name="email" id="email" placeholder="johndoe@example.com" />
-						<UserIcon />
-					</div>
-					<div className={styles.inputGroup}>
-						<label htmlFor="password">
-							<span>Password</span>
-							<a href="/forgot-password">Forgot Password?</a>
-						</label>
-						<input type="password" name="password" id="password" />
-						<LockKeyholeIcon />
-					</div>
-					<Button type="submit">
-						<span>Enter the observatory</span>
-						<ArrowRightIcon />
-					</Button>
-				</form>
+				<Card.Content>
+					<Flex as="form" direction="column" className={styles.form}>
+						<Input label="Email Address" type="email" name="email" id="email" placeholder="johndoe@example.com" icon={<AtSignIcon />} />
+						<Input
+							label={
+								<label htmlFor="password">
+									<span>Password</span>
+									<a href="/forgot-password">Forgot Password?</a>
+								</label>
+							}
+							type="password"
+							name="password"
+							id="password"
+							placeholder="••••••••"
+							icon={<LockKeyholeIcon />}
+						/>
+						<Button type="submit">
+							<span>Enter the observatory</span>
+							<ArrowRightIcon className="icon" />
+						</Button>
+					</Flex>
+				</Card.Content>
 
-				<div className={styles.footerSection}>
+				<Card.Footer className={styles.footerSection}>
 					<p>New to the pilot?</p>
-					<a href="/signup">Create an account</a>
-				</div>
-			</div>
-		</main>
+					<Link to="/register">Create an account</Link>
+				</Card.Footer>
+			</Card>
+		</Flex>
 	);
 }

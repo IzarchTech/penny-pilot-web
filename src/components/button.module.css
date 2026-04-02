@@ -15,6 +15,10 @@ button {
 button > svg {
 	width: 16px;
 	height: 16px;
+	top: auto;
+	left: auto;
+	color: inherit;
+	position: inherit;
 }
 
 button:hover {

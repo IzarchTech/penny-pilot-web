@@ -1,0 +1,54 @@
+.container {
+	gap: 8px;
+	position: relative;
+}
+
+label {
+	font-family: "Inter", sans-serif;
+	font-weight: 600;
+	font-size: 12px;
+	line-height: 16px;
+	text-transform: uppercase;
+	letter-spacing: 1.2px;
+	display: inline-flex;
+	justify-content: space-between;
+    flex: 1;
+}
+
+input {
+	padding: 12px;
+	padding-left: 40px;
+	border-radius: 4px;
+	border: none;
+	outline: none;
+	background-color: #353534;
+	font-size: 14px;
+	color: var(--text-primary);
+	transition: all 600ms ease-in-out;
+}
+
+input:focus {
+	outline: none;
+	border: 0.5px solid var(--text-primary);
+	transform: scale(1.02);
+}
+
+svg {
+	position: absolute;
+	top: 50%;
+	left: 2%;
+	transform: translateY(-2%);
+	color: var(--text-muted);
+	pointer-events: none;
+	transition: color 0.5s ease-in-out;
+}
+
+input:focus ~ svg,
+input:hover ~ svg,
+input:active ~ svg {
+	color: var(--text-primary);
+}
+
+input:placeholder-shown {
+	color: var(--text-muted);
+}

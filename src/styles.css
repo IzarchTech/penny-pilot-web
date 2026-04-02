@@ -26,3 +26,13 @@ body {
   user-select: none;
   -webkit-user-select: none;
 }
+
+a {
+	color: var(--primary-color);
+	text-decoration: none;
+	transition: color 0.5s ease-in-out;
+}
+
+a:hover {
+	color: var(--secondary-color);
+}
