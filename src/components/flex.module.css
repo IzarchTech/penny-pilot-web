@@ -1,11 +1,11 @@
 .container {
-    display: flex;
+	display: flex;
 }
 
 .column {
-    flex-direction: column;
+	flex-direction: column;
 }
 
 .row {
-    flex-direction: row;
+	flex-direction: row;
 }

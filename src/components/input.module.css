@@ -12,7 +12,7 @@ label {
 	letter-spacing: 1.2px;
 	display: inline-flex;
 	justify-content: space-between;
-    flex: 1;
+	flex: 1;
 }
 
 input {
