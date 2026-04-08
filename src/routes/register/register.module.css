@@ -4,6 +4,10 @@
 	justify-content: center;
 }
 
+.form {
+	gap: 24px;
+}
+
 .description {
 	text-align: center;
 }

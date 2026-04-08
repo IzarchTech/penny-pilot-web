@@ -53,7 +53,7 @@ function LoginRouteComponent() {
 							label={
 								<label htmlFor="password">
 									<span>Password</span>
-									<a href="/forgot-password">Forgot Password?</a>
+									<Link to="/forgot-password">Forgot Password?</Link>
 								</label>
 							}
 							type="password"

@@ -20,7 +20,7 @@ function RouteComponent() {
 				</Card.Header>
 
 				<Card.Content>
-					<Flex as="form" direction="column">
+					<Flex as="form" direction="column" className={styles.form}>
 						<Input label="Full Name" type="text" name="fullName" id="name" placeholder="John Doe" icon={<UserIcon />} />
 						<Input label="Email Address" type="email" name="email" id="email" placeholder="johndoe@example.com" icon={<AtSignIcon />} />
 						<Input label="Password" type="password" name="password" id="password" placeholder="••••••••" icon={<LockKeyholeIcon />} />
