@@ -12,7 +12,9 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as RegisterRouteRouteImport } from './routes/register/route'
 import { Route as LoginRouteRouteImport } from './routes/login/route'
 import { Route as ForgotPasswordRouteRouteImport } from './routes/forgot-password/route'
+import { Route as protectedRouteRouteImport } from './routes/(protected)/route'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as protectedOverviewRouteRouteImport } from './routes/(protected)/overview/route'
 
 const RegisterRouteRoute = RegisterRouteRouteImport.update({
   id: '/register',
@@ -29,10 +31,19 @@ const ForgotPasswordRouteRoute = ForgotPasswordRouteRouteImport.update({
   path: '/forgot-password',
   getParentRoute: () => rootRouteImport,
 } as any)
+const protectedRouteRoute = protectedRouteRouteImport.update({
+  id: '/(protected)',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
+} as any)
+const protectedOverviewRouteRoute = protectedOverviewRouteRouteImport.update({
+  id: '/overview',
+  path: '/overview',
+  getParentRoute: () => protectedRouteRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
@@ -40,30 +51,42 @@ export interface FileRoutesByFullPath {
   '/forgot-password': typeof ForgotPasswordRouteRoute
   '/login': typeof LoginRouteRoute
   '/register': typeof RegisterRouteRoute
+  '/overview': typeof protectedOverviewRouteRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/forgot-password': typeof ForgotPasswordRouteRoute
   '/login': typeof LoginRouteRoute
   '/register': typeof RegisterRouteRoute
+  '/overview': typeof protectedOverviewRouteRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/(protected)': typeof protectedRouteRouteWithChildren
   '/forgot-password': typeof ForgotPasswordRouteRoute
   '/login': typeof LoginRouteRoute
   '/register': typeof RegisterRouteRoute
+  '/(protected)/overview': typeof protectedOverviewRouteRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/forgot-password' | '/login' | '/register'
+  fullPaths: '/' | '/forgot-password' | '/login' | '/register' | '/overview'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/forgot-password' | '/login' | '/register'
-  id: '__root__' | '/' | '/forgot-password' | '/login' | '/register'
+  to: '/' | '/forgot-password' | '/login' | '/register' | '/overview'
+  id:
+    | '__root__'
+    | '/'
+    | '/(protected)'
+    | '/forgot-password'
+    | '/login'
+    | '/register'
+    | '/(protected)/overview'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  protectedRouteRoute: typeof protectedRouteRouteWithChildren
   ForgotPasswordRouteRoute: typeof ForgotPasswordRouteRoute
   LoginRouteRoute: typeof LoginRouteRoute
   RegisterRouteRoute: typeof RegisterRouteRoute
@@ -92,6 +115,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ForgotPasswordRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/(protected)': {
+      id: '/(protected)'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof protectedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -99,11 +129,31 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/(protected)/overview': {
+      id: '/(protected)/overview'
+      path: '/overview'
+      fullPath: '/overview'
+      preLoaderRoute: typeof protectedOverviewRouteRouteImport
+      parentRoute: typeof protectedRouteRoute
+    }
   }
 }
 
+interface protectedRouteRouteChildren {
+  protectedOverviewRouteRoute: typeof protectedOverviewRouteRoute
+}
+
+const protectedRouteRouteChildren: protectedRouteRouteChildren = {
+  protectedOverviewRouteRoute: protectedOverviewRouteRoute,
+}
+
+const protectedRouteRouteWithChildren = protectedRouteRoute._addFileChildren(
+  protectedRouteRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  protectedRouteRoute: protectedRouteRouteWithChildren,
   ForgotPasswordRouteRoute: ForgotPasswordRouteRoute,
   LoginRouteRoute: LoginRouteRoute,
   RegisterRouteRoute: RegisterRouteRoute,

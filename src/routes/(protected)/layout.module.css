@@ -1,0 +1,14 @@
+.container {
+	height: 100vh;
+	display: grid;
+	grid-template-rows: 1fr auto;
+	min-width: 1280px;
+	margin: 0 auto;
+}
+
+.content {
+	padding: 0 24px;
+	overflow-y: auto;
+	height: 100%;
+	flex: 1;
+}

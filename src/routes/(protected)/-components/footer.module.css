@@ -1,0 +1,6 @@
+.footer {
+	padding: 14px;
+	font-family: "Inter", sans-serif;
+	font-size: 14px;
+	color: var(--text-muted);
+}
