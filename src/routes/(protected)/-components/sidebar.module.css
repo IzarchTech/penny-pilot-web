@@ -15,6 +15,7 @@
 	text-transform: uppercase;
 	font-weight: bold;
 	letter-spacing: 1.2px;
+	transition: all 0.3s linear;
 }
 
 .sidebarItem.active,
@@ -23,7 +24,35 @@
 	color: var(--primary-color);
 }
 
+.logoutButton > svg,
 .sidebarItem > svg {
 	width: 18px;
 	height: 18px;
+}
+
+.logoutButton {
+	padding: 14px;
+	font-family: "Inter", sans-serif;
+	font-size: 12px;
+	color: var(--text-muted);
+	display: flex;
+	gap: 8px;
+	align-items: center;
+	text-transform: uppercase;
+	font-weight: bold;
+	letter-spacing: 1.2px;
+	transition: all 0.3s linear;
+	outline: none;
+	border: none;
+	background: none;
+	cursor: pointer;
+}
+
+.logoutButton:hover {
+	background-color: rgba(255, 0, 0, 0.1);
+	color: rgb(220, 38, 38);
+}
+
+.mainNav {
+	flex: 1;
 }
