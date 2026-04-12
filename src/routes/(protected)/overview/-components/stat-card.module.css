@@ -1,0 +1,53 @@
+.statCard {
+	background-color: var(--secondary-background-color);
+	border-radius: 8px;
+	align-items: flex-start;
+	padding: 32px;
+}
+
+.positiveStat {
+	border-left: 2px solid #4edea3;
+}
+
+.positive {
+	color: #4edea3;
+}
+
+.title {
+	text-transform: uppercase;
+	font-family: "Inter", sans-serif;
+	font-weight: 600;
+	font-size: 12px;
+	line-height: 18px;
+	letter-spacing: 1.2px;
+	color: #bbcabf;
+}
+
+.value {
+	font-size: 48px;
+	font-weight: 800;
+	letter-spacing: -2.4px;
+	align-self: stretch;
+}
+
+.description {
+	font-weight: 700;
+	font-size: 12px;
+	padding-top: 8px;
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+}
+
+.statusIcon {
+	width: 12px;
+	height: 12px;
+}
+
+.negative {
+	color: #ffb3af;
+}
+
+.neutral {
+	color: var(--text-muted);
+}
