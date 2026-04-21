@@ -1,0 +1,25 @@
+.chartContainer {
+	gap: 16px;
+}
+
+.chartWrapper {
+	background-color: var(--secondary-background-color);
+	border-radius: 8px;
+	padding: 16px;
+	height: 400px;
+}
+
+.chartHeader {
+	gap: 4px;
+}
+
+.chartHeader > h2 {
+	font-weight: 600;
+	line-height: 32px;
+	letter-spacing: -0.8px;
+}
+
+.chartHeader > p {
+	font-family: "Inter", sans-serif;
+	font-size: 14px;
+}
